@@ -47,7 +47,7 @@ loading_animation(){
 	echo -ne "\b$2\n"
 }
 
-function dockerExistMenu() {
+dockerExistMenu() {
 	echo "It looks like Docker is already installed."
 	echo ""
 	echo "What do you want to do?"
@@ -76,14 +76,14 @@ function dockerExistMenu() {
 	esac
 }
 
-function dockerDoesntExistMenu() {
+dockerDoesntExistMenu() {
 	echo "This script will install Docker + Docker compose V2 (Plugin)"
 	prompt_confirm "Do you want to continue?"
 	install_docker
 	install_docker_compose
 }
 
-function prompt_confirm() {
+prompt_confirm() {
 	read -r -p "$1 [y/N] " response
 	case "$response" in
 		[yY][eE][sS]|[yY]) 
