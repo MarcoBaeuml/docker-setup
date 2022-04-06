@@ -10,7 +10,6 @@ install_docker() {
 install_docker_compose() {
 	# get the latest version from the release page at GitHub
 	( VERSION=$(curl -sS https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
-	sleep 5
 	# download Docker compose V2 plugin
 	curl -sSL -o /usr/local/lib/docker/cli-plugins/docker-compose --create-dirs https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-linux-$(uname -p)
 	chmod +x /usr/local/lib/docker/cli-plugins/docker-compose ) &
@@ -61,11 +60,13 @@ function dockerExistMenu() {
 	done
 	case $MENU_OPTION in
 	1)
+		prompt_confirm "Sure you want to reinstall Docker + Docker compose"
 		remove_docker
 		install_docker
 		install_docker_compose
 		;;
 	2)
+		prompt_confirm "Sure you want to remove Docker + Docker compose"
 		remove_docker
 		;;
 	3)
@@ -77,11 +78,16 @@ function dockerExistMenu() {
 
 function dockerDoesntExistMenu() {
 	echo "This script will install Docker + Docker compose V2 (Plugin)"
-	read -r -p "Do you want to continue? [y/N] " response
+	prompt_confirm "Do you want to continue?"
+	install_docker
+	install_docker_compose
+}
+
+function prompt_confirm() {
+	read -r -p "$1 [y/N] " response
 	case "$response" in
 		[yY][eE][sS]|[yY]) 
-			install_docker
-			install_docker_compose
+			return 0
 			;;
 		*)
 			echo "exiting..."
