@@ -11,7 +11,7 @@ install_docker_compose() {
 	# get the latest version from the release page at GitHub
 	( VERSION=$(curl -sS https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*\d')
 	# download Docker compose V2 plugin
-	curl -sSL -o /usr/local/lib/docker/cli-plugins/docker-compose --create-dirs https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-linux-$(uname -p)
+	curl -sSL -o /usr/local/lib/docker/cli-plugins/docker-compose --create-dirs https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-linux-$(uname -m)
 	chmod +x /usr/local/lib/docker/cli-plugins/docker-compose ) &
 	loading_animation "Installing Docker compose:" "\033[0;32mfinished\033[0m"
 	echo $(docker compose version)
