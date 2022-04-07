@@ -28,7 +28,8 @@ remove_docker() {
 	rm -rf /usr/local/bin/docker-compose
 	rm -rf /usr/local/lib/docker/
 	rm -rf ~/.docker
-	rm -rf /usr/libexec/docker ) &> /dev/null &
+	rm -rf /usr/libexec/docker
+	rm -rf /run/docker ) &> /dev/null &
 	loading_animation "Removing Docker + Docker compose:" "\033[0;32mfinished\033[0m"
 }
 
