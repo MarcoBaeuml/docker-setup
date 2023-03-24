@@ -1,3 +1,6 @@
+# [Archived]
+Archived as this functionality is now implemented in the the offical Docker install script
+
 # Install Docker + Docker compose
 
 This script will install the latest version from Docker using the offical Docker install script + the latest version from Docker compose V2.
